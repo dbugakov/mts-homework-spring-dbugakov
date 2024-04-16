@@ -1,0 +1,10 @@
+1 Dog null null null
+2 Shark null null null
+3 Shark null null null
+4 Wolf null null null
+5 Dog null null null
+6 Dog null null null
+7 Shark null null null
+8 Cat null null null
+9 Dog null null null
+10 Dog null null null
