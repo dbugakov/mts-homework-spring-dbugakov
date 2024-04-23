@@ -2,6 +2,9 @@ package ru.siebel.spring.AnimalSpring.Repository;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
 import ru.siebel.spring.AnimalSpring.Api.Repository.AnimalRepository;
@@ -24,13 +27,22 @@ import java.util.stream.Collectors;
  * Класс AnimalRepositoryImpl, реализует {@link AnimalRepository}.
  */
 @Repository
+@Data
 public class AnimalRepositoryImpl implements AnimalRepository {
+
+    CreateAnimalServiceImpl animalService;
+
+    Map<String, List<Animal>> animalMap;
 
     @Override
     @PostConstruct
-    public Map<String, List<Animal>> createAnimals() {
-        CreateAnimalServiceImpl animalService = new CreateAnimalServiceImpl();
-        return animalService.createAnimals();
+    public void createAnimals() {
+        animalMap = animalService.createAnimals();
+    }
+
+    @Autowired
+    public AnimalRepositoryImpl(@Qualifier("serviceFromConfig") CreateAnimalServiceImpl createAnimalService) {
+        this.animalService = createAnimalService;
     }
 
     /**

@@ -1,4 +1,5 @@
 package ru.siebel.spring.AnimalSpring.Api.Model;
+
 import ru.siebel.spring.AnimalSpring.Model.AbstractAnimal;
 
 import java.io.Serializable;

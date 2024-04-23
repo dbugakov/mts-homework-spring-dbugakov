@@ -1,11 +1,8 @@
 package ru.siebel.spring.AnimalSpring.Service;
 
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
-import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
 import ru.siebel.spring.AnimalSpring.Api.Service.CreateAnimalService;
@@ -18,13 +15,14 @@ import java.util.*;
  * Класс CreateAnimalServiceImpl, реализует {@link CreateAnimalService}.
  */
 @Service
+@Data
 @Scope("prototype")
 public class CreateAnimalServiceImpl implements CreateAnimalService {
     Map<String, List<Animal>> resultMap;
     Animal animal;
     String stringForFileFill = "";
     @Value("#{'${animal.cat.names}'.split(',')}")
-    private List<String> listOfNames;
+    List<String> listOfNames;
 
     /**
      * Функция создания десяти уникальных животных.
@@ -74,10 +72,11 @@ public class CreateAnimalServiceImpl implements CreateAnimalService {
             resultMap.put(animal.getClass().getSimpleName(), new ArrayList<>());
             resultMap.get(animal.getClass().getSimpleName()).add(animal);
         }
+        System.out.println(animal);
     }
 
     private void fillFile(int cnt) {
         stringForFileFill += cnt + " " + animal.getBreed() + " " + animal.getName() + " " + animal.getCost() + " " + animal.getBirthDate() + "\n";
-        FileUtil.fileChannelWrite(stringForFileFill, "Animals/src/main/resources/animals/logData.txt");
+        FileUtil.fileChannelWrite(stringForFileFill, "src/main/resources/animals/logData.txt");
     }
 }

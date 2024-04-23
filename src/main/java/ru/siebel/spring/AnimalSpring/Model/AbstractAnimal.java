@@ -2,8 +2,6 @@ package ru.siebel.spring.AnimalSpring.Model;
 
 
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
 import ru.siebel.spring.AnimalSpring.Util.FileUtil;
 
@@ -133,7 +131,6 @@ public abstract class AbstractAnimal implements Animal {
                 animal = new Wolf();
                 break;
         }
-        System.out.println(animal);
         return animal;
     }
 

@@ -1,14 +1,16 @@
 package ru.siebel.spring.AnimalSpring.Util;
 
 
-
 import com.fasterxml.jackson.core.JacksonException;
+import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.core.JsonParser;
 import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
-import ru.siebel.spring.AnimalSpring.Model.*;
+import ru.siebel.spring.AnimalSpring.Model.Cat;
+import ru.siebel.spring.AnimalSpring.Model.Dog;
+import ru.siebel.spring.AnimalSpring.Model.Shark;
+import ru.siebel.spring.AnimalSpring.Model.Wolf;
 
 import java.io.IOException;
 import java.time.LocalDate;

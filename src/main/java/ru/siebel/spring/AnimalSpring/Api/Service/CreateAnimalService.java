@@ -1,7 +1,6 @@
 package ru.siebel.spring.AnimalSpring.Api.Service;
 
 
-import org.springframework.stereotype.Service;
 import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
 import ru.siebel.spring.AnimalSpring.Model.AbstractAnimal;
 import ru.siebel.spring.AnimalSpring.Service.CreateAnimalServiceImpl;

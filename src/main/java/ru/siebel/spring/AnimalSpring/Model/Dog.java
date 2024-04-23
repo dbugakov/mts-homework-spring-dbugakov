@@ -1,7 +1,5 @@
 package ru.siebel.spring.AnimalSpring.Model;
 
-import org.springframework.stereotype.Component;
-
 import java.time.LocalDate;
 
 /**

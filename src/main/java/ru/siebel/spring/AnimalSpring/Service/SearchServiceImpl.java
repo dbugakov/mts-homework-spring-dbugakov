@@ -1,9 +1,10 @@
 package ru.siebel.spring.AnimalSpring.Service;
 
-import org.springframework.stereotype.Component;
 import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
 import ru.siebel.spring.AnimalSpring.Api.Service.SearchService;
-import ru.siebel.spring.AnimalSpring.Exception.*;
+import ru.siebel.spring.AnimalSpring.Exception.InvalidAnimalBirthDateException;
+import ru.siebel.spring.AnimalSpring.Exception.InvalidAnimalException;
+
 import java.time.LocalDate;
 
 /**
