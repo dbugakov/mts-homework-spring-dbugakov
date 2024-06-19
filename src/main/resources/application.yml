@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: AnimalSpring
+  datasource:
+    url: jdbc:postgresql://localhost:5432/HW-15
+    username: postgres
+    password: postgres
+    hikari:
+      connectionTimeout: 20000
+      maximumPoolSize: 5
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
