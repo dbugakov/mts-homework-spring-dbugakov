@@ -6,11 +6,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
-import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
-import ru.siebel.spring.AnimalSpring.Model.Cat;
-import ru.siebel.spring.AnimalSpring.Model.Dog;
-import ru.siebel.spring.AnimalSpring.Model.Shark;
-import ru.siebel.spring.AnimalSpring.Model.Wolf;
+import ru.siebel.spring.AnimalSpring.Model.Animal;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -36,22 +32,6 @@ public class DeserializeUtil extends JsonDeserializer<List<Animal>> {
                 jsonParser.nextToken();
                 if ("breed".equals(fieldName)) {
                     if (animal != null) animals.add(animal);
-                    breed = jsonParser.getValueAsString();
-                    switch (breed) {
-                        case "Cat":
-                            animal = new Cat();
-                            break;
-                        case "Dog":
-                            animal = new Dog();
-                            break;
-                        case "Shark":
-                            animal = new Shark();
-                            break;
-                        case "Wolf":
-                            animal = new Wolf();
-                            break;
-                    }
-                    animal.setBreed(jsonParser.getValueAsString());
                 } else switch (fieldName) {
                     case "name":
                         animal.setName(jsonParser.getValueAsString());
