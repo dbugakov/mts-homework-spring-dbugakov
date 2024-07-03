@@ -1,31 +1,37 @@
 package ru.siebel.spring.AnimalSpring.Api.Repository;
 
 
-import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
-import ru.siebel.spring.AnimalSpring.Exception.InvalidAnimalBirthDateException;
-import ru.siebel.spring.AnimalSpring.Repository.AnimalRepositoryImpl;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+import ru.siebel.spring.AnimalSpring.Model.Animal;
+import ru.siebel.spring.AnimalSpring.Model.AnimalType;
 
-import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Map;
+import java.util.Optional;
 
-/**
- * SearchService, реализован в {@link AnimalRepositoryImpl}.
- */
-public interface AnimalRepository {
+@Repository
+public interface AnimalRepository extends JpaRepository<Animal, Long> {
 
-    void createAnimals();
+    List<Animal> getAnimalByName(String name);
 
-    Map<String, LocalDate> findLeapYearNames(List<Animal> animalList) throws InvalidAnimalBirthDateException;
+    Optional<Animal> getAnimalById(Long aLong);
+    @Query("FROM AnimalType WHERE name = ?1")
+    List<AnimalType> getAnimalTypeByName(String name);
 
-    Map<Animal, Integer> findOlderAnimal(List<Animal> animalList, int age) throws IOException;
+    @Query(value = "SELECT avg(extract(year from age(birth_date))) FROM public.animal", nativeQuery = true)
+    double findAverageAge();
 
-    Map<String, List<Animal>> findDuplicate(List<Animal> animalList);
+    @Query(value = "SELECT name FROM public.animal" +
+            "where extract(year from age(birth_date)) > 5" +
+            "and cost > (select avg(cost) FROM public.animal)", nativeQuery = true)
+    List<String> findOldAndExpensive();
 
-    double findAverageAge(List<Animal> animalList);
-
-    List<String> findOldAndExpensive(List<Animal> animalList);
-
-    List<String> findMinConstAnimals(List<Animal> animalList);
+    @Query(value = "select name from public.animal" +
+            "where id in" +
+            "(SELECT id FROM public.animal" +
+            "ORDER BY cost ASC" +
+            "limit 3)" +
+            "ORDER BY name DESC", nativeQuery = true)
+    List<String> findMinCostAnimals();
 }

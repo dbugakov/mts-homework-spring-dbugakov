@@ -3,7 +3,7 @@ package ru.siebel.spring.AnimalSpring.Util;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import ru.siebel.spring.AnimalSpring.Api.Model.Animal;
+import ru.siebel.spring.AnimalSpring.Model.Animal;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
@@ -17,7 +17,7 @@ public class SerializeUtil extends JsonSerializer<Animal> {
                           SerializerProvider serializerProvider)
             throws IOException {
         jsonGenerator.writeStartObject();
-        jsonGenerator.writeStringField("breed", animal.getBreed());
+        jsonGenerator.writeStringField("breed", animal.getBreed().getName());
         jsonGenerator.writeStringField("name", animal.getName());
         jsonGenerator.writeNumberField("cost", animal.getCost());
         jsonGenerator.writeStringField("character", animal.getCharacter());
