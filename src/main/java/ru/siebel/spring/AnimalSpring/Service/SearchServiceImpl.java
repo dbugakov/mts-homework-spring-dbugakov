@@ -40,27 +40,18 @@ public class SearchServiceImpl implements SearchService {
 
     @PostConstruct
     private void init() throws IOException {
-        /*System.out.println("getAllAnimals");
-        System.out.println(getAllAnimals());
-        System.out.println("getAnimalsByName - Шарик");
-        System.out.println(getAnimalsByName(" Шарик"));
-        System.out.println("getAnimalsByName - Кролик");
-        System.out.println(getAnimalsByName("Кролик"));
-
-        System.out.println("findLeapYearNames");
-        System.out.println(findLeapYearNames());*/
+        System.out.println("getAnimalByName");
+        System.out.println(getAnimalByName(" Шарик"));
         System.out.println("findDuplicate");
         System.out.println(findDuplicate());
         System.out.println("findMinCostAnimals");
         System.out.println(findMinCostAnimals());
         System.out.println("findAverageAge");
         System.out.println(findAverageAge());
-        System.out.println("findOlderAnimal");
-        System.out.println(findOlderAnimal(1));
     }
 
-    public List<Animal> getAnimalsByName(String name) {
-        return animalRepository.getAnimalsByName(name);
+    public List<Animal> getAnimalByName(String name) {
+        return animalRepository.getAnimalByName(name);
     }
 
     public List<Animal> getAllAnimals() {
@@ -74,13 +65,13 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public boolean checkLeapYearAnimalById(Long animalId) throws InvalidAnimalBirthDateException {
-        Animal animal = animalRepository.getById(animalId);
+        Optional<Animal> animal = animalRepository.getAnimalById(animalId);
         String outputMessage;
         boolean result;
-        if (animal != null) {
-            LocalDate animalBirthDate = animal.getBirthDate();
+        if (animal.isPresent()) {
+            LocalDate animalBirthDate = animal.get().getBirthDate();
             if (animalBirthDate != null) {
-                outputMessage = animal.getName();
+                outputMessage = animal.get().getName();
 
                 if (animalBirthDate.isLeapYear()) {
                     outputMessage += " был рожден в високосный год";
@@ -91,7 +82,7 @@ public class SearchServiceImpl implements SearchService {
                 }
                 System.out.println(outputMessage);
             } else
-                throw new InvalidAnimalBirthDateException("У животного " + animal.getName() + " не указана дата его рождения!");
+                throw new InvalidAnimalBirthDateException("У животного " + animal.get().getName() + " не указана дата его рождения!");
         } else throw new InvalidAnimalException("На вход пришло некорректный объект животного! " + LocalDate.now());
         return result;
     }

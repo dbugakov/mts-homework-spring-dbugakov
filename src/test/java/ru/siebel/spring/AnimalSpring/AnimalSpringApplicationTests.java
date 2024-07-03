@@ -13,8 +13,7 @@ import ru.siebel.spring.AnimalSpring.Service.SearchServiceImpl;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @ActiveProfiles({"test"})
@@ -38,7 +37,7 @@ class AnimalSpringApplicationTests {
             animal.setBreed(animalTypes.get(0));
         }
         AnimalId = createAnimalService.addAnimal(animal);
-        assertEquals(AnimalId, searchService.getAnimalRepository().getById(AnimalId).getId());
+        assertTrue(searchService.getAnimalRepository().getAnimalById(AnimalId).isPresent());
     }
 
     @Test

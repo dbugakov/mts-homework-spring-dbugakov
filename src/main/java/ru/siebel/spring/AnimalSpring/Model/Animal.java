@@ -2,7 +2,9 @@ package ru.siebel.spring.AnimalSpring.Model;
 
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import ru.siebel.spring.AnimalSpring.Util.FileUtil;
 
 import javax.persistence.*;
@@ -18,6 +20,8 @@ import java.util.Objects;
  */
 @Data
 @Entity
+@ToString
+@EqualsAndHashCode
 @NoArgsConstructor
 public class Animal implements Serializable, Comparable<Animal> {
 
@@ -60,25 +64,6 @@ public class Animal implements Serializable, Comparable<Animal> {
         this.cost = cost;
         this.character = character;
         this.birthDate = birthDate;
-    }
-
-    /**
-     * Переопределение функции equals из {@link Object}.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Animal that = (Animal) o;
-        return Objects.equals(name, that.name);
-    }
-
-    /**
-     * Переопределение функции hashCode из {@link Object}.
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(breed, name, cost, character, birthDate);
     }
 
     /**
